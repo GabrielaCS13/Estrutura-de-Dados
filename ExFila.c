@@ -10,7 +10,7 @@ typedef struct TipoNodo TipoNodo;
 
 int menu();
 int inserirInicio(TipoNodo LL[], int IA, int FA, int *IL, int *FL, TipoNodo infoNodo);
-int removerInicio(TipoNodo LL[], int IA, int FA, int *IL, int *FL, TipoNodo infoNodo);
+int remover(TipoNodo LL[], int IA, int FA, int *IL, int *FL, TipoNodo infoNodo);
 int quantidadeelementos(int IA, int FA, int IL, int FL);
 int mostrartopo(TipoNodo LL[], int IA);
 int mostrarultimo(TipoNodo LL[], int FL);
@@ -35,7 +35,7 @@ int main()
                 printf("Inserido com sucesso!!!\n");
             break;
         case 2:
-            removerInicio(LL, IA, FA, &IL, &FL, infoNodo);
+            remover(LL, IA, FA, &IL, &FL, infoNodo);
             break;
         case 3:
             printf("\nQuantidade de elementos\n");
@@ -101,14 +101,22 @@ int inserirInicio(TipoNodo LL[], int IA, int FA, int *IL, int *FL, TipoNodo info
     }
 }
 
-int removerInicio(TipoNodo LL[], int IA, int FA, int *IL, int *FL, TipoNodo infoNodo)
+int remover(TipoNodo LL[], int IA, int FA, int *IL, int *FL, TipoNodo infoNodo)
 {
-    for (int i = *FL; i >= *IL; i--)
-        LL[i - 1] = LL[i];
-    *FL = *FL - 1;
-    return 0;
-}
 
+    if (*IL == -1)
+        return 1;
+    else
+    {
+        TipoNodo vazio;
+        LL[*IL] = vazio;
+
+        for (int i = *IL; i <= *FL; i++)
+            LL[i] = LL[i + 1];
+        *FL = *FL - 1;
+        return 0;
+    }
+}
 int quantidadeelementos(int IA, int FA, int IL, int FL)
 {
     int quant = 0;
